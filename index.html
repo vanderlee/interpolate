@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+ <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>jQuery Interpolate</title>
+
+		<!-- jQuery/jQueryUI (hosted) -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js"></script>
+
+		<!-- Interpolate -->
+		<script src="jquery.interpolate.js"></script>
+
+		<style>
+			body {
+				font-family: "Segoe UI", Verdana, Helvetica, Arial, sans-serif;
+				font-size: 11px;
+			}
+
+			#divs {
+				background: #ddd url('demo/alpha.gif');
+				border: solid thin silver;
+			}
+			
+			#divs > div{
+				background-color: blue;
+				height: 10px;
+				margin-right: 100px;
+			}
+		</style>
+
+		<script>
+			function refresh() {
+				var $divs = $("#divs > div").removeAttr('style');
+
+				$divs.each(function(index) {
+					$(this).interpolate({
+						backgroundColor: 'red',
+						opacity: 0,
+						marginLeft: 100,
+						marginRight: 0
+					}, index / ($divs.length - 1));
+				});
+			}
+
+			$(function() {
+				refresh();
+
+				$('#divs-add').click(function() {
+					$('#divs').append('<div/>');
+					refresh();
+				});
+
+				$('#divs-delete').click(function() {
+					$('#divs > div:first').remove();
+					refresh();
+				});
+			});
+		</script>
+    </head>
+    <body>
+		<h1>jQuery Interpolate</h1>
+		CSS interpolation.
+
+		<h2>Features</h2>
+		<ul>
+			<li>Interpolate between any two CSS rules supported by jQuery and/or jQueryUI.</li>
+			<li>Small code; used builtin jQuery animation.</li>
+			<li>Both an .interpolate() and jQuery.interpolate() version included.</li>
+		</ul>
+
+		<h2>Examples</h2>
+		<button id="divs-add">Add &lt;div&gt;</button>
+		<button id="divs-delete">Delete &lt;div&gt;</button>
+		<div id="divs">
+			<div></div><div></div><div></div><div></div><div></div>
+			<div></div><div></div><div></div><div></div><div></div>
+			<div></div><div></div><div></div><div></div><div></div>
+			<div></div><div></div><div></div><div></div><div></div>
+		</div>
+	</body>
+</html>
