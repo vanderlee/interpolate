@@ -4,7 +4,7 @@
 /*!
  * Interpolate
  *
- * Copyright (c) 2013-2015 Martijn W. van der Lee
+ * Copyright (c) 2013-2016 Martijn W. van der Lee
  * Licensed under the MIT.
  */
 /* CSS style interpolation.
@@ -16,8 +16,15 @@
 	"use strict";
 
 	/**
-	 * .interpolate( propertyName, propertyValue [, blend] [, easing] )
-	 * .interpolate( propertyMap [, blend] [, easing] )
+	 * Smoothly blend a CSS property with the value for the element
+	 *
+	 * .interpolate( propertyName, propertyValue[, blend[, easing]])
+	 * .interpolate( propertyMap[, blend[, easing]])
+	 *
+	 * @param {string} name Name of the property
+	 * @param {string} value Value of the property
+	 * @param {float} blend Ratio of blending in range [0,1] (default `0.5`)
+	 * @param {string} easing Easing method to use (default `linear`)
 	 */
 	$.fn.interpolate = function(name, value, blend, easing) {		
 		var _elem = this[0];
@@ -31,10 +38,18 @@
 			blend = $.isNumeric(blend) ? blend : .5;
 			$.Tween(_elem, {duration: 1}, name, value, easing || 'linear').run(blend);
 		}
-	}
+	};
 
 	/**
-	 * jQuery.interpolate( propertyMapStart, propertyMapEnd [, blend] [, easing] )
+	 * Smoothly blend between two maps of CSS properties.
+	 *
+	 * jQuery.interpolate( propertyMapStart, propertyMapEnd[, blend[, easing]])
+	 *
+	 * @param {float} start Set of CSS properties to blend from
+	 * @param {object} end Set of CSS properties to blend into
+	 * @param {float} blend Ratio of blending in range [0,1] (default `0.5`)
+	 * @param {string} easing Easing method to use (default `linear`)
+	 * @returns {object} Set of CSS properties representing the blended state
 	 */
 	$.interpolate = function(start, end, blend, easing) {
 		var elem = $('<span/>'),
@@ -44,5 +59,5 @@
 			state[name] = elem.css(name);
 		});
 		return state;
-	}
+	};
 }(jQuery));
