@@ -50,7 +50,7 @@
 	 *
 	 * Smoothly blend between two maps of CSS properties.
 	 *
-	 * @param {float} start Set of CSS properties to blend from
+	 * @param {object} start Set of CSS properties to blend from
 	 * @param {object} end Set of CSS properties to blend into
 	 * @param {float} blend Ratio of blending in range [0,1] (default `0.5`)
 	 * @param {string} easing Easing method to use (default `linear`)
