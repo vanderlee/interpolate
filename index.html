@@ -36,7 +36,8 @@
 				$divs.each(function(index) {
 					$(this).interpolate({
 						backgroundColor: 'yellow',
-						opacity: 0,
+						opacity: 0
+					}, index / ($divs.length - 1)).interpolate({
 						marginLeft: 100,
 						marginRight: 0
 					}, index / ($divs.length - 1));
